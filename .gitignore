@@ -9,7 +9,7 @@ yarn.lock
 .env.*.local
 
 # WhatsApp / Baileys Sessions (NEVER COMMIT)
-session/
+
 *.data.json
 .wwebjs_auth/
 .wwebjs_cache/

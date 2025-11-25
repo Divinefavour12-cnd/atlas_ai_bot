@@ -280,12 +280,34 @@ async function startBot() {
         sock.ev.on('connection.update', async (update) => {
             const { connection, lastDisconnect, qr } = update;
             
-            if (qr) {
-                console.log('\n🔐 WHATSAPP AUTHENTICATION REQUIRED');
-                console.log('📱 Scan this QR code with your WhatsApp phone:\n');
-                qrcode.generate(qr, { small: true });
-                console.log('\n⏳ Waiting for QR scan...\n');
+         if (qr) {
+    console.log('\n🔐 WHATSAPP AUTHENTICATION REQUIRED');
+    console.log('📱 Scan this QR code with your WhatsApp phone:\n');
+
+    qrcode.generate(qr, { small: true })
+console.log("🔍 TIP: Zoom OUT your terminal window if it's too large.");
+
+    // === Option 3: Save QR PNG ===
+    try {
+        const QRCode = require('qrcode');
+        const qrPath = './qr.png';
+
+        QRCode.toFile(qrPath, qr, {
+            type: 'png',
+            margin: 2,
+            width: 400
+        }, (err) => {
+            if (!err) {
+                console.log('📁 QR code also saved as: ${qrPath}');
+                console.log('👉 If terminal QR is too big, open qr.png and scan it.');
+            } else {
+                console.log('⚠ Could not save QR as PNG:', err.message);
             }
+        });
+    } catch (e) {
+        console.log("⚠ PNG QR Save Error:", e.message);
+    }
+}
 
             if (connection === 'close') {
                 const statusCode = lastDisconnect?.error?.output?.statusCode;
