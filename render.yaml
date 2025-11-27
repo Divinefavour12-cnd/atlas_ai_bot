@@ -1,6 +1,6 @@
 services:
   - type: worker
-    name: atlas-ai-whatsapp-bot
+    name: atlas_ai_bot
     env: node
     plan: free
     branch: main
