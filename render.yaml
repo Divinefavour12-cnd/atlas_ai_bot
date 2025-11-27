@@ -1,0 +1,14 @@
+services:
+  - type: worker
+    name: atlas-ai-whatsapp-bot
+    env: node
+    plan: free
+    branch: main
+    buildCommand: npm install && mkdir -p session
+    startCommand: npm start
+    autoDeploy: true
+    envVars:
+      - key: GROQ_API_KEY
+        sync: false
+      - key: SESSION_PATH
+        value: /opt/render/project/src/session
